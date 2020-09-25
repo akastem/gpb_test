@@ -14,9 +14,9 @@ use constant {
 };
 
 my $dbh = DBI->connect(
-	CONFIG->{mysql}->{dsn}, 
-	CONFIG->{mysql}->{user},
-	CONFIG->{mysql}->{password}
+	CONFIG->{'mysql'}->{'dsn'},
+	CONFIG->{'mysql'}->{'user'},
+	CONFIG->{'mysql'}->{'password'}
 ) or die 'Error connecting to database :(';
 
 get '/' => sub {
@@ -63,7 +63,8 @@ post '/' => sub {
 				'int_id'
 			) : {};
 
-			$notify = $count > LIMIT ? sprintf('Записей, найденных с данным получателем, более %d!', LIMIT) : '';
+			$notify = $count > LIMIT ?
+				sprintf('Записей, найденных с данным получателем, более %d. Найдено: %d!', LIMIT, $count) : '';
 
 			return $self->render(
 				'template' => 'page',
@@ -83,6 +84,8 @@ post '/' => sub {
 		'messages' => undef
 	);
 };
+
+sub DESTROY { $dbh->disconnect }
 
 app->start;
 

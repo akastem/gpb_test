@@ -36,9 +36,9 @@ use constant {
 };
 
 my $dbh = DBI->connect(
-	CONFIG->{mysql}->{dsn}, 
-	CONFIG->{mysql}->{user},
-	CONFIG->{mysql}->{password}
+	CONFIG->{'mysql'}->{'dsn'},
+	CONFIG->{'mysql'}->{'user'},
+	CONFIG->{'mysql'}->{'password'}
 ) or die 'Error connecting to database :(';
 
 # Чтоб не много облегчить работу с БД и не дёргать на каждую запись, вставляется пачками по LIMIT штук
@@ -93,6 +93,8 @@ while (readline $FH) {
 		insert_pack('log', '(?,?,?,?)', \@to_add_log);
 		undef @to_add_log;
 	}
-}
+};
 
-close($FH)
+$dbh->disconnect;
+
+close($FH);
