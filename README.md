@@ -1,4 +1,4 @@
-### GPB TEST (Log Search)
+### Log TEST (Log Search)
 
 #### Install and run
 
