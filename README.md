@@ -1,4 +1,4 @@
-### Log TEST (Log Search)
+### Parse/Search exim log
 
 #### Install and run
 
